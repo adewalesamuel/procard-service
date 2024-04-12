@@ -24,6 +24,17 @@ def pg_get_all_registration():
     conn.close()
     return registrations
 
+def pg_get_all_citizen():
+    citizens = []
+
+    with conn:
+        with conn.cursor() as cur:
+            cur.execute("SELECT id from citizens")
+            citizens = cur.fetchall()
+    
+    conn.close()
+    return citizens
+
 def mongo_get_dbs():
     return client.list_database_names()
 
@@ -36,4 +47,4 @@ def mongo_get_all_enrolment():
 def mongo_count_collection(collection_name: str):
     return mongo_db[collection_name].count_documents({})
 
-print(pg_get_all_registration()[0])
+print(pg_get_all_citizen())
