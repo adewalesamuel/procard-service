@@ -22,7 +22,8 @@ registration_field_list = ['id', 'enrolment_no', 'account_terminal_id',
                             'inprogress', 'transmitted']
 citizen_field_list = ['id', 'nni', 'is_temp_nni', 'id_card_number', 'last_name', 
                       'first_name', 'spouse_name','gender', 'birth_date', 'birth_town', 
-                      'birth_country', 'nationality', 'father_last_name', 'father_first_name', 'father_spouse_name', 'father_birth_date', 'father_birth_town',
+                      'birth_country', 'nationality', 'father_last_name', 'father_first_name', 
+                      'father_spouse_name', 'father_birth_date', 'father_birth_town',
                       'father_nni', 'mother_last_name', 'mother_first_name', 
                       'mother_spouse_name', 'mother_birth_date', 'mother_birth_town', 
                       'mother_nni', 'other', 'created_at', 'updated_at']
