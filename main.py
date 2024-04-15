@@ -27,6 +27,7 @@ citizen_field_list = ['id', 'nni', 'is_temp_nni', 'id_card_number', 'last_name',
                       'mother_spouse_name', 'mother_birth_date', 'mother_birth_town', 
                       'mother_nni', 'other', 'created_at', 'updated_at']
 
+
 def pg_get_all_registration():
     registrations = []
     fields_str = ', '.join(registration_field_list)
@@ -40,6 +41,7 @@ def pg_get_all_registration():
     
     conn.close()
     return registrations
+
 
 def pg_get_all_citizen():
     citizens = []
@@ -56,6 +58,7 @@ def pg_get_all_citizen():
     conn.close()
     return citizens
 
+
 def pg_set_registration_in_progress(id, value):
     with conn:
         with conn.cursor() as cur:
@@ -64,6 +67,7 @@ def pg_set_registration_in_progress(id, value):
                         WHERE id=%s""", (value, id))
     
     conn.close()
+
 
 def parse_pg_data(data, field_list):
     data_dict = {}
@@ -74,8 +78,10 @@ def parse_pg_data(data, field_list):
         
     return data_dict
 
+
 def mongo_get_all_enrolment():
     return mongo_db.enrolments.find()
+
 
 def init():
     try:
@@ -102,18 +108,21 @@ def init():
             pg_set_registration_in_progress(registration_item['id'], 0)
 
             if is_matched is False:
-                pass
-                # set registration_item status to coated
-
                 if has_citizen is True:
-                    pass
+                    print("set registration_item status to award")
+                    
                     # set registration_item status to award
+                else:
+                    print("set registration_item status to coated")
+                    # create citizens
+                    # set registration_item status to coated
+
             else:
-                pass
-                # set registration_item status to exists
+                print("set registration_item status to exist")
+                # set registration_item status to exist
 
     except Exception as e:
         print(e)
-    
+
 
 init()
