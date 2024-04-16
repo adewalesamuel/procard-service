@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 import psycopg2
 import pymongo
 import json
+from face import face
+from finger import finger
 
 load_dotenv()
 
@@ -79,6 +81,15 @@ def parse_pg_data(data, field_list):
         
     return data_dict
 
+def is_registration_match_citizen_info(registration, citizen):
+    is_match = True
+    field_list = ['id_card_number', 'last_name', 'first_name',
+                          'spouse_name', 'full_name', 'gender']
+    
+    for field in field_list:
+        if registration[field] != citizen[field]: is_match = False
+
+    return is_match
 
 def mongo_get_all_enrolment():
     return mongo_db.enrolments.find()
@@ -100,7 +111,13 @@ def init():
                     (registration_item['nni'] != citizen_item['nni']):
                     is_matched = False
 
-                    # match by other info
+                    has_citizen = is_registration_match_citizen_info(
+                        registration_item, citizen_item)
+                    
+                    if has_citizen is True:
+                        pass
+                        # match face and finger
+
                 else:
                     has_citizen = True
 
